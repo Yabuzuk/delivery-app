@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Plane, Map, User } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useTranslation } from '../utils/translations';
+import { useTranslation } from '../utils/LanguageContext';
 
 const Header = () => {
   const { t } = useTranslation();

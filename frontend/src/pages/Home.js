@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Users, Shield, Clock } from 'lucide-react';
-import { useTranslation } from '../utils/translations';
+import { useTranslation } from '../utils/LanguageContext';
 
 const Home = () => {
   const { t } = useTranslation();
