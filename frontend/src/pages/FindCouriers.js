@@ -2,17 +2,56 @@ import React, { useState, useEffect } from 'react';
 import { Plane, Car, Train, MapPin, Clock, Package } from 'lucide-react';
 import InteractiveMap from '../components/InteractiveMap';
 import BackButton from '../components/BackButton';
+import RouteFilter from '../components/RouteFilter';
 
 const FindCouriers = () => {
   const [trips, setTrips] = useState([]);
+  const [filteredTrips, setFilteredTrips] = useState([]);
+  const [filters, setFilters] = useState({
+    from: '',
+    to: '',
+    dateFrom: '',
+    dateTo: '',
+    maxPrice: ''
+  });
 
   useEffect(() => {
     const savedTrips = JSON.parse(localStorage.getItem('trips') || '[]');
-    setTrips(savedTrips.filter(trip => trip.status === 'available'));
+    const availableTrips = savedTrips.filter(trip => trip.status === 'available');
+    setTrips(availableTrips);
+    setFilteredTrips(availableTrips);
   }, []);
 
+  useEffect(() => {
+    let filtered = trips.filter(trip => {
+      const matchFrom = !filters.from || trip.from.toLowerCase().includes(filters.from.toLowerCase());
+      const matchTo = !filters.to || trip.to.toLowerCase().includes(filters.to.toLowerCase());
+      const matchDateFrom = !filters.dateFrom || trip.date >= filters.dateFrom;
+      const matchDateTo = !filters.dateTo || trip.date <= filters.dateTo;
+      const matchPrice = !filters.maxPrice || parseInt(trip.price) <= parseInt(filters.maxPrice);
+      
+      return matchFrom && matchTo && matchDateFrom && matchDateTo && matchPrice;
+    });
+    
+    setFilteredTrips(filtered);
+  }, [filters, trips]);
+
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      from: '',
+      to: '',
+      dateFrom: '',
+      dateTo: '',
+      maxPrice: ''
+    });
+  };
+
   const bookCourier = (tripId) => {
-    const updatedTrips = trips.map(trip => 
+    const updatedTrips = filteredTrips.map(trip => 
       trip.id === tripId ? { ...trip, status: 'booked' } : trip
     );
     
@@ -22,7 +61,8 @@ const FindCouriers = () => {
     );
     
     localStorage.setItem('trips', JSON.stringify(finalTrips));
-    setTrips(updatedTrips.filter(trip => trip.status === 'available'));
+    const availableTrips = finalTrips.filter(trip => trip.status === 'available');
+    setTrips(availableTrips);
     
     alert('Курьер забронирован!');
   };
@@ -44,13 +84,19 @@ const FindCouriers = () => {
         <p style={{ color: '#666' }}>Выберите курьера по вашему маршруту</p>
       </div>
 
+      <RouteFilter 
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onClearFilters={clearFilters}
+      />
+
       <div className="card" style={{ marginBottom: '32px' }}>
-        <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта маршрутов</h3>
-        <InteractiveMap routes={trips} />
+        <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта маршрутов ({filteredTrips.length})</h3>
+        <InteractiveMap routes={filteredTrips} />
       </div>
 
       <div className="grid-responsive">
-        {trips.map(trip => (
+        {filteredTrips.map(trip => (
           <div key={trip.id} className="card" style={{
             border: '2px solid #f0f0f0',
             transition: 'all 0.3s',
@@ -138,10 +184,10 @@ const FindCouriers = () => {
           </div>
         ))}
         
-        {trips.length === 0 && (
+        {filteredTrips.length === 0 && (
           <div className="card" style={{ textAlign: 'center', gridColumn: '1 / -1' }}>
             <p style={{ color: '#666', fontSize: '18px' }}>
-              Пока нет доступных курьеров. Попробуйте позже!
+              {trips.length === 0 ? 'Пока нет доступных курьеров.' : 'Ничего не найдено по вашим фильтрам.'}
             </p>
           </div>
         )}

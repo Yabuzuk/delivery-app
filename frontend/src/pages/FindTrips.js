@@ -2,17 +2,56 @@ import React, { useState, useEffect } from 'react';
 import { Plane, Car, Train, MapPin, Clock, DollarSign } from 'lucide-react';
 import InteractiveMap from '../components/InteractiveMap';
 import BackButton from '../components/BackButton';
+import RouteFilter from '../components/RouteFilter';
 
 const FindTrips = () => {
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [filters, setFilters] = useState({
+    from: '',
+    to: '',
+    dateFrom: '',
+    dateTo: '',
+    maxPrice: ''
+  });
 
   useEffect(() => {
     const savedOrders = JSON.parse(localStorage.getItem('orders') || '[]');
-    setOrders(savedOrders.filter(order => order.status === 'active'));
+    const activeOrders = savedOrders.filter(order => order.status === 'active');
+    setOrders(activeOrders);
+    setFilteredOrders(activeOrders);
   }, []);
 
+  useEffect(() => {
+    let filtered = orders.filter(order => {
+      const matchFrom = !filters.from || order.from.toLowerCase().includes(filters.from.toLowerCase());
+      const matchTo = !filters.to || order.to.toLowerCase().includes(filters.to.toLowerCase());
+      const matchDateFrom = !filters.dateFrom || order.deadline >= filters.dateFrom;
+      const matchDateTo = !filters.dateTo || order.deadline <= filters.dateTo;
+      const matchPrice = !filters.maxPrice || parseInt(order.price) <= parseInt(filters.maxPrice);
+      
+      return matchFrom && matchTo && matchDateFrom && matchDateTo && matchPrice;
+    });
+    
+    setFilteredOrders(filtered);
+  }, [filters, orders]);
+
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      from: '',
+      to: '',
+      dateFrom: '',
+      dateTo: '',
+      maxPrice: ''
+    });
+  };
+
   const takeOrder = (orderId) => {
-    const updatedOrders = orders.map(order => 
+    const updatedOrders = filteredOrders.map(order => 
       order.id === orderId ? { ...order, status: 'taken' } : order
     );
     
@@ -22,7 +61,8 @@ const FindTrips = () => {
     );
     
     localStorage.setItem('orders', JSON.stringify(finalOrders));
-    setOrders(updatedOrders.filter(order => order.status === 'active'));
+    const activeOrders = finalOrders.filter(order => order.status === 'active');
+    setOrders(activeOrders);
     
     alert('Заказ принят!');
   };
@@ -44,13 +84,19 @@ const FindTrips = () => {
         <p style={{ color: '#666' }}>Выберите заказ по вашему маршруту</p>
       </div>
 
+      <RouteFilter 
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onClearFilters={clearFilters}
+      />
+
       <div className="card" style={{ marginBottom: '32px' }}>
-        <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта заказов</h3>
-        <InteractiveMap routes={orders} />
+        <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта заказов ({filteredOrders.length})</h3>
+        <InteractiveMap routes={filteredOrders} />
       </div>
 
       <div className="grid-responsive">
-        {orders.map(order => (
+        {filteredOrders.map(order => (
           <div key={order.id} className="card" style={{
             border: '2px solid #f0f0f0',
             transition: 'all 0.3s',
@@ -129,10 +175,10 @@ const FindTrips = () => {
           </div>
         ))}
         
-        {orders.length === 0 && (
+        {filteredOrders.length === 0 && (
           <div className="card" style={{ textAlign: 'center', gridColumn: '1 / -1' }}>
             <p style={{ color: '#666', fontSize: '18px' }}>
-              Пока нет доступных заказов. Создайте первый заказ!
+              {orders.length === 0 ? 'Пока нет доступных заказов.' : 'Ничего не найдено по вашим фильтрам.'}
             </p>
           </div>
         )}
