@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Map } from 'lucide-react';
-import SimpleMap from '../components/SimpleMap';
+import InteractiveMap from '../components/InteractiveMap';
 import BackButton from '../components/BackButton';
 
 const MapPage = () => {
@@ -29,7 +29,7 @@ const MapPage = () => {
       </div>
 
       <div className="card">
-        <SimpleMap routes={allRoutes} />
+        <InteractiveMap routes={allRoutes} />
       </div>
 
       <div style={{ 

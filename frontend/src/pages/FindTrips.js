@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plane, Car, Train, MapPin, Clock, DollarSign } from 'lucide-react';
-import SimpleMap from '../components/SimpleMap';
+import InteractiveMap from '../components/InteractiveMap';
 import BackButton from '../components/BackButton';
 
 const FindTrips = () => {
@@ -46,7 +46,7 @@ const FindTrips = () => {
 
       <div className="card" style={{ marginBottom: '32px' }}>
         <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта заказов</h3>
-        <SimpleMap routes={orders} />
+        <InteractiveMap routes={orders} />
       </div>
 
       <div className="grid-responsive">
