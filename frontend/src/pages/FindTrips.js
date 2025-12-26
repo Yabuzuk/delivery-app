@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plane, Car, Train, MapPin, Clock, DollarSign } from 'lucide-react';
+import YandexMap from '../components/YandexMap';
+import BackButton from '../components/BackButton';
 
 const FindTrips = () => {
   const [orders, setOrders] = useState([]);
@@ -36,16 +38,18 @@ const FindTrips = () => {
 
   return (
     <div>
+      <BackButton />
       <div className="card" style={{ textAlign: 'center', marginBottom: '32px' }}>
         <h2 style={{ fontSize: '28px', marginBottom: '8px' }}>Доступные заказы</h2>
         <p style={{ color: '#666' }}>Выберите заказ по вашему маршруту</p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-        gap: '20px'
-      }}>
+      <div className="card" style={{ marginBottom: '32px' }}>
+        <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта заказов</h3>
+        <YandexMap routes={orders} />
+      </div>
+
+      <div className="grid-responsive">
         {orders.map(order => (
           <div key={order.id} className="card" style={{
             border: '2px solid #f0f0f0',

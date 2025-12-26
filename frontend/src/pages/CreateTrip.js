@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plane, Car, Train } from 'lucide-react';
+import BackButton from '../components/BackButton';
 
 const CreateTrip = () => {
   const [trip, setTrip] = useState({
@@ -34,7 +35,9 @@ const CreateTrip = () => {
   };
 
   return (
-    <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
+    <div>
+      <BackButton />
+      <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         {getTransportIcon(trip.transport)}
         <h2 style={{ fontSize: '28px', marginBottom: '8px', marginTop: '16px' }}>Создать поездку</h2>
@@ -64,7 +67,7 @@ const CreateTrip = () => {
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <div className="grid-2-cols">
           <div className="form-group">
             <label>Транспорт</label>
             <select
@@ -89,7 +92,7 @@ const CreateTrip = () => {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <div className="grid-2-cols">
           <div className="form-group">
             <label>Макс. вес (кг)</label>
             <input

@@ -25,7 +25,7 @@ const Home = () => {
           Отправляйте и получайте посылки с попутчиками по всему миру
         </p>
         
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div className="flex-buttons">
           <Link to="/create-order" className="btn" style={{
             fontSize: '18px',
             padding: '16px 32px'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Package, Plane } from 'lucide-react';
+import { Package, Plane, Map } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -15,7 +15,9 @@ const Header = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         maxWidth: '1200px',
-        margin: '0 auto'
+        margin: '0 auto',
+        flexWrap: 'wrap',
+        gap: '16px'
       }}>
         <Link to="/" style={{
           display: 'flex',
@@ -30,7 +32,12 @@ const Header = () => {
           ПопутДоставка
         </Link>
         
-        <div style={{ display: 'flex', gap: '24px' }}>
+        <div style={{ 
+          display: 'flex', 
+          gap: '16px',
+          flexWrap: 'wrap',
+          justifyContent: 'center'
+        }}>
           <Link to="/create-order" style={{
             textDecoration: 'none',
             color: '#667eea',
@@ -62,6 +69,17 @@ const Header = () => {
             fontWeight: '600'
           }}>
             Заказы
+          </Link>
+          <Link to="/map" style={{
+            textDecoration: 'none',
+            color: '#667eea',
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
+            <Map size={16} />
+            Карта
           </Link>
         </div>
       </nav>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Plane, Car, Train, MapPin, Clock, Weight } from 'lucide-react';
+import { Plane, Car, Train, MapPin, Clock, Package } from 'lucide-react';
+import YandexMap from '../components/YandexMap';
+import BackButton from '../components/BackButton';
 
 const FindCouriers = () => {
   const [trips, setTrips] = useState([]);
@@ -36,16 +38,18 @@ const FindCouriers = () => {
 
   return (
     <div>
+      <BackButton />
       <div className="card" style={{ textAlign: 'center', marginBottom: '32px' }}>
         <h2 style={{ fontSize: '28px', marginBottom: '8px' }}>Найти курьера</h2>
         <p style={{ color: '#666' }}>Выберите курьера по вашему маршруту</p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-        gap: '20px'
-      }}>
+      <div className="card" style={{ marginBottom: '32px' }}>
+        <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта маршрутов</h3>
+        <YandexMap routes={trips} />
+      </div>
+
+      <div className="grid-responsive">
         {trips.map(trip => (
           <div key={trip.id} className="card" style={{
             border: '2px solid #f0f0f0',
@@ -106,7 +110,7 @@ const FindCouriers = () => {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <Weight size={16} style={{ color: '#666' }} />
+                <Package size={16} style={{ color: '#666' }} />
                 <span style={{ color: '#666' }}>До {trip.maxWeight} кг</span>
               </div>
             </div>

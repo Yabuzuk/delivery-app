@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Package } from 'lucide-react';
+import BackButton from '../components/BackButton';
 
 const CreateOrder = () => {
   const [order, setOrder] = useState({
@@ -24,7 +25,9 @@ const CreateOrder = () => {
   };
 
   return (
-    <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
+    <div>
+      <BackButton />
+      <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <Package size={48} style={{ color: '#667eea', marginBottom: '16px' }} />
         <h2 style={{ fontSize: '28px', marginBottom: '8px' }}>Создать заказ</h2>
@@ -54,7 +57,7 @@ const CreateOrder = () => {
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <div className="grid-2-cols">
           <div className="form-group">
             <label>Вес (кг)</label>
             <input
