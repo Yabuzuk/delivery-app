@@ -18,7 +18,11 @@ const LanguageSwitcher = () => {
   const currentLanguage = languages.find(lang => lang.code === currentLang);
 
   React.useEffect(() => {
-    const handleClickOutside = () => setIsOpen(false);
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.language-switcher')) {
+        setIsOpen(false);
+      }
+    };
     if (isOpen) {
       document.addEventListener('click', handleClickOutside);
       return () => document.removeEventListener('click', handleClickOutside);
@@ -26,9 +30,12 @@ const LanguageSwitcher = () => {
   }, [isOpen]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="language-switcher" style={{ position: 'relative' }}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -64,7 +71,8 @@ const LanguageSwitcher = () => {
           {languages.map(lang => (
             <button
               key={lang.code}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setLanguage(lang.code);
                 setIsOpen(false);
               }}
