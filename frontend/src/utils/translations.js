@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const translations = {
   ru: {
     appName: 'ПопутДоставка',
@@ -181,7 +183,7 @@ export const translations = {
 };
 
 export const useTranslation = () => {
-  const currentLang = localStorage.getItem('language') || 'ru';
+  const [currentLang, setCurrentLang] = React.useState(localStorage.getItem('language') || 'ru');
   
   const t = (key) => {
     return translations[currentLang]?.[key] || translations.ru[key] || key;
@@ -189,7 +191,7 @@ export const useTranslation = () => {
   
   const setLanguage = (lang) => {
     localStorage.setItem('language', lang);
-    window.location.reload();
+    setCurrentLang(lang);
   };
   
   return { t, currentLang, setLanguage };
