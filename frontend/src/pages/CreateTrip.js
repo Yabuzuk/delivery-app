@@ -130,6 +130,7 @@ const CreateTrip = () => {
           Создать заявку курьера
         </button>
       </form>
+      </div>
     </div>
   );
 };

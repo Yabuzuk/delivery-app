@@ -106,6 +106,7 @@ const CreateOrder = () => {
           Создать заказ
         </button>
       </form>
+      </div>
     </div>
   );
 };
