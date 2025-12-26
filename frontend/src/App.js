@@ -6,6 +6,7 @@ import CreateOrder from './pages/CreateOrder';
 import FindTrips from './pages/FindTrips';
 import CreateTrip from './pages/CreateTrip';
 import FindCouriers from './pages/FindCouriers';
+import MyOrders from './pages/MyOrders';
 import MapPage from './pages/MapPage';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/find-trips" element={<FindTrips />} />
             <Route path="/create-trip" element={<CreateTrip />} />
             <Route path="/find-couriers" element={<FindCouriers />} />
+            <Route path="/my-orders" element={<MyOrders />} />
             <Route path="/map" element={<MapPage />} />
           </Routes>
         </main>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Package, Plane, Map } from 'lucide-react';
+import { Package, Plane, Map, User } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -69,6 +69,17 @@ const Header = () => {
             fontWeight: '600'
           }}>
             Заказы
+          </Link>
+          <Link to="/my-orders" style={{
+            textDecoration: 'none',
+            color: '#667eea',
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
+            <User size={16} />
+            Мои заказы
           </Link>
           <Link to="/map" style={{
             textDecoration: 'none',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plane, Car, Train, MapPin, Clock, Package } from 'lucide-react';
-import YandexMap from '../components/YandexMap';
+import SimpleMap from '../components/SimpleMap';
 import BackButton from '../components/BackButton';
 
 const FindCouriers = () => {
@@ -46,7 +46,7 @@ const FindCouriers = () => {
 
       <div className="card" style={{ marginBottom: '32px' }}>
         <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Карта маршрутов</h3>
-        <YandexMap routes={trips} />
+        <SimpleMap routes={trips} />
       </div>
 
       <div className="grid-responsive">

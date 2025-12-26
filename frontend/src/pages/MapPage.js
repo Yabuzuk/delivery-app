@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Map } from 'lucide-react';
-import YandexMap from '../components/YandexMap';
+import SimpleMap from '../components/SimpleMap';
 import BackButton from '../components/BackButton';
 
 const MapPage = () => {
@@ -29,7 +29,7 @@ const MapPage = () => {
       </div>
 
       <div className="card">
-        <YandexMap routes={allRoutes} />
+        <SimpleMap routes={allRoutes} />
       </div>
 
       <div style={{ 

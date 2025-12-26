@@ -8,7 +8,7 @@ const YandexMap = ({ routes = [] }) => {
     // Загружаем Яндекс.Карты API
     if (!window.ymaps) {
       const script = document.createElement('script');
-      script.src = 'https://api-maps.yandex.ru/2.1/?apikey=YOUR_API_KEY&lang=ru_RU';
+      script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
       script.onload = initMap;
       document.head.appendChild(script);
     } else {
