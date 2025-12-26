@@ -28,7 +28,11 @@ export const translations = {
     mapRoutes: 'Карта маршрутов',
     orderCreated: 'Заказ создан успешно!',
     courierBooked: 'Курьер забронирован!',
-    orderTaken: 'Заказ принят!'
+    orderTaken: 'Заказ принят!',
+    fromCity: 'Город отправления',
+    toCity: 'Город назначения',
+    packageDesc: 'Документы, сувениры...',
+    createOrderDesc: 'Заполните детали для отправки посылки'
   },
   
   en: {
@@ -58,7 +62,11 @@ export const translations = {
     mapRoutes: 'Route map',
     orderCreated: 'Order created successfully!',
     courierBooked: 'Courier booked!',
-    orderTaken: 'Order taken!'
+    orderTaken: 'Order taken!',
+    fromCity: 'Departure city',
+    toCity: 'Destination city',
+    packageDesc: 'Documents, souvenirs...',
+    createOrderDesc: 'Fill in details to send package'
   },
 
   es: {
