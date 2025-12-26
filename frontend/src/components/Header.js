@@ -34,23 +34,24 @@ const Header = () => {
         
         <div style={{ 
           display: 'flex', 
-          gap: '16px',
+          gap: '12px',
           flexWrap: 'wrap',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          fontSize: '14px'
         }}>
           <Link to="/create-order" style={{
             textDecoration: 'none',
             color: '#667eea',
             fontWeight: '600'
           }}>
-            Отправить посылку
+            Отправить
           </Link>
           <Link to="/find-couriers" style={{
             textDecoration: 'none',
             color: '#667eea',
             fontWeight: '600'
           }}>
-            Найти курьера
+            Курьеры
           </Link>
           <Link to="/create-trip" style={{
             textDecoration: 'none',
@@ -60,8 +61,8 @@ const Header = () => {
             alignItems: 'center',
             gap: '4px'
           }}>
-            <Plane size={16} />
-            Стать курьером
+            <Plane size={14} />
+            Поездка
           </Link>
           <Link to="/find-trips" style={{
             textDecoration: 'none',
@@ -78,8 +79,8 @@ const Header = () => {
             alignItems: 'center',
             gap: '4px'
           }}>
-            <User size={16} />
-            Мои заказы
+            <User size={14} />
+            Мои
           </Link>
           <Link to="/map" style={{
             textDecoration: 'none',
@@ -89,7 +90,7 @@ const Header = () => {
             alignItems: 'center',
             gap: '4px'
           }}>
-            <Map size={16} />
+            <Map size={14} />
             Карта
           </Link>
         </div>
