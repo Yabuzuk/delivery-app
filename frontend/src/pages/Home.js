@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Users, Shield, Clock } from 'lucide-react';
+import { useTranslation } from '../utils/translations';
 
 const Home = () => {
+  const { t } = useTranslation();
+  
   return (
     <div>
       <section style={{
@@ -15,14 +18,14 @@ const Home = () => {
           fontWeight: 'bold',
           marginBottom: '16px'
         }}>
-          Доставка посылок попутчиками
+          {t('homeTitle')}
         </h1>
         <p style={{
           fontSize: '20px',
           marginBottom: '32px',
           opacity: 0.9
         }}>
-          Отправляйте и получайте посылки с попутчиками по всему миру
+          {t('homeSubtitle')}
         </p>
         
         <div className="flex-buttons">
@@ -30,7 +33,7 @@ const Home = () => {
             fontSize: '18px',
             padding: '16px 32px'
           }}>
-            Отправить посылку
+            {t('sendPackageBtn')}
           </Link>
           <Link to="/find-couriers" className="btn" style={{
             fontSize: '18px',
@@ -38,7 +41,7 @@ const Home = () => {
             background: 'rgba(255,255,255,0.2)',
             backdropFilter: 'blur(10px)'
           }}>
-            Найти курьера
+            {t('findCourierBtn')}
           </Link>
           <Link to="/create-trip" className="btn" style={{
             fontSize: '18px',
@@ -46,7 +49,7 @@ const Home = () => {
             background: 'rgba(255,255,255,0.2)',
             backdropFilter: 'blur(10px)'
           }}>
-            Стать курьером
+            {t('becomeCourierBtn')}
           </Link>
         </div>
       </section>

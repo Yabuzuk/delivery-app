@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Plane, Map, User } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from '../utils/translations';
 
 const Header = () => {
+  const { t } = useTranslation();
+  
   return (
     <header style={{
       background: 'rgba(255,255,255,0.95)',
@@ -29,70 +33,78 @@ const Header = () => {
           fontWeight: 'bold'
         }}>
           <Package size={32} />
-          ПопутДоставка
+          {t('appName')}
         </Link>
         
         <div style={{ 
           display: 'flex', 
-          gap: '12px',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          fontSize: '14px'
+          alignItems: 'center',
+          gap: '16px'
         }}>
-          <Link to="/create-order" style={{
-            textDecoration: 'none',
-            color: '#667eea',
-            fontWeight: '600'
+          <LanguageSwitcher />
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '12px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            fontSize: '14px'
           }}>
-            Отправить
-          </Link>
-          <Link to="/find-couriers" style={{
-            textDecoration: 'none',
-            color: '#667eea',
-            fontWeight: '600'
-          }}>
-            Курьеры
-          </Link>
-          <Link to="/create-trip" style={{
-            textDecoration: 'none',
-            color: '#667eea',
-            fontWeight: '600',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}>
-            <Plane size={14} />
-            Поездка
-          </Link>
-          <Link to="/find-trips" style={{
-            textDecoration: 'none',
-            color: '#667eea',
-            fontWeight: '600'
-          }}>
-            Заказы
-          </Link>
-          <Link to="/my-orders" style={{
-            textDecoration: 'none',
-            color: '#667eea',
-            fontWeight: '600',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}>
-            <User size={14} />
-            Мои
-          </Link>
-          <Link to="/map" style={{
-            textDecoration: 'none',
-            color: '#667eea',
-            fontWeight: '600',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}>
-            <Map size={14} />
-            Карта
-          </Link>
+            <Link to="/create-order" style={{
+              textDecoration: 'none',
+              color: '#667eea',
+              fontWeight: '600'
+            }}>
+              {t('sendPackage')}
+            </Link>
+            <Link to="/find-couriers" style={{
+              textDecoration: 'none',
+              color: '#667eea',
+              fontWeight: '600'
+            }}>
+              {t('findCouriers')}
+            </Link>
+            <Link to="/create-trip" style={{
+              textDecoration: 'none',
+              color: '#667eea',
+              fontWeight: '600',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <Plane size={14} />
+              {t('createTrip')}
+            </Link>
+            <Link to="/find-trips" style={{
+              textDecoration: 'none',
+              color: '#667eea',
+              fontWeight: '600'
+            }}>
+              {t('orders')}
+            </Link>
+            <Link to="/my-orders" style={{
+              textDecoration: 'none',
+              color: '#667eea',
+              fontWeight: '600',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <User size={14} />
+              {t('myOrders')}
+            </Link>
+            <Link to="/map" style={{
+              textDecoration: 'none',
+              color: '#667eea',
+              fontWeight: '600',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <Map size={14} />
+              {t('map')}
+            </Link>
+          </div>
         </div>
       </nav>
     </header>
