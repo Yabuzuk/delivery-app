@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { MapPin, Package } from 'lucide-react';
 import BackButton from '../components/BackButton';
+import { useTranslation } from '../utils/LanguageContext';
 
 const CreateOrder = () => {
+  const { t } = useTranslation();
   const [order, setOrder] = useState({
     from: '',
     to: '',
@@ -20,7 +22,7 @@ const CreateOrder = () => {
     existingOrders.push(newOrder);
     localStorage.setItem('orders', JSON.stringify(existingOrders));
     
-    alert('Заказ создан успешно!');
+    alert(t('orderCreated'));
     setOrder({ from: '', to: '', weight: '', description: '', price: '', deadline: '' });
   };
 
@@ -30,16 +32,16 @@ const CreateOrder = () => {
       <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <Package size={48} style={{ color: '#667eea', marginBottom: '16px' }} />
-        <h2 style={{ fontSize: '28px', marginBottom: '8px' }}>Создать заказ</h2>
-        <p style={{ color: '#666' }}>Заполните детали для отправки посылки</p>
+        <h2 style={{ fontSize: '28px', marginBottom: '8px' }}>{t('createOrder')}</h2>
+        <p style={{ color: '#666' }}>{t('createOrderDesc') || 'Заполните детали для отправки посылки'}</p>
       </div>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Откуда</label>
+          <label>{t('from')}</label>
           <input
             type="text"
-            placeholder="Город отправления"
+            placeholder={t('fromCity') || 'Город отправления'}
             value={order.from}
             onChange={(e) => setOrder({...order, from: e.target.value})}
             required
@@ -47,10 +49,10 @@ const CreateOrder = () => {
         </div>
 
         <div className="form-group">
-          <label>Куда</label>
+          <label>{t('to')}</label>
           <input
             type="text"
-            placeholder="Город назначения"
+            placeholder={t('toCity') || 'Город назначения'}
             value={order.to}
             onChange={(e) => setOrder({...order, to: e.target.value})}
             required
@@ -59,7 +61,7 @@ const CreateOrder = () => {
 
         <div className="grid-2-cols">
           <div className="form-group">
-            <label>Вес (кг)</label>
+            <label>{t('weight')}</label>
             <input
               type="number"
               placeholder="0.5"
@@ -70,7 +72,7 @@ const CreateOrder = () => {
           </div>
 
           <div className="form-group">
-            <label>Вознаграждение (₽)</label>
+            <label>{t('reward')}</label>
             <input
               type="number"
               placeholder="500"
@@ -82,10 +84,10 @@ const CreateOrder = () => {
         </div>
 
         <div className="form-group">
-          <label>Описание посылки</label>
+          <label>{t('description')}</label>
           <input
             type="text"
-            placeholder="Документы, сувениры..."
+            placeholder={t('packageDesc') || 'Документы, сувениры...'}
             value={order.description}
             onChange={(e) => setOrder({...order, description: e.target.value})}
             required
@@ -93,7 +95,7 @@ const CreateOrder = () => {
         </div>
 
         <div className="form-group">
-          <label>Срок доставки</label>
+          <label>{t('deadline')}</label>
           <input
             type="date"
             value={order.deadline}
@@ -103,7 +105,7 @@ const CreateOrder = () => {
         </div>
 
         <button type="submit" className="btn" style={{ width: '100%', fontSize: '18px' }}>
-          Создать заказ
+          {t('createOrder')}
         </button>
       </form>
       </div>
